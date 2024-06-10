@@ -1,28 +1,36 @@
 #include <iostream>
 using namespace std;
 
-void towerOfHanoi (int n, char from_rod, char to_rod, char spare_rod){
-	if (n==0){
-		return;
-	}
-	towerOfHanoi(n-1, from_rod, spare_rod, to_rod);
-	cout << "\nDisk " << n << " moved from " << from_rod << " to " << to_rod <<endl;
-	towerOfHanoi(n-1, spare_rod, to_rod, from_rod);
+void towerOfHanoi(int n, char from_rod, char to_rod,
+                  char aux_rod)
+{
+    if (n == 0) {
+        return;
+    }
+    towerOfHanoi(n - 1, from_rod, aux_rod, to_rod);
+    cout << "Move disk " << n << " from rod " << from_rod
+         << " to rod " << to_rod << endl;
+    towerOfHanoi(n - 1, aux_rod, to_rod, from_rod);
 }
 
-int main(){
-	int n;
-	char ans;
-	
-	do {
-		cout << "Input: ";
-		cin >> n;
-		towerOfHanoi (n, 'A', 'C', 'B');
-		
-		cout << "\nPlay again? [Y/N]"; 
-		cin >> ans;
-		if (ans == 'N'){
-			break;
-		}
-	} while (true);
+// Driver code
+int main()
+{
+    int N;
+
+    while(true){
+        cout << "\x1b[32m \nInput: \x1b[0m";
+        cin >> N;
+
+        if (N<0 || N == 0){
+            cout << "\x1b[31m No moves to do \n N must be greater than zero. \n Try again. \x1b[0m";
+        }
+     // A, B and C are names of rods
+        cout << "\n\x1b[32mOutput: \x1b[0m\n";
+        towerOfHanoi(N, 'A', 'C', 'B');
+
+    }
+
+    return 0;
+
 }
